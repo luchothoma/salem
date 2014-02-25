@@ -1,0 +1,11 @@
+You can contact us at dingocode@gmail.com or visit
+our website http://www.dingoframework.com
+
+Documentation for the Dingo Framework can be found at
+http://www.dingoframework.com/docs
+
+You can report issues and make feature requests at
+http://code.google.com/p/dingoframework/issues/list
+
+Keep up with the latest news by following us on twitter
+http://twitter.com/dingocode
