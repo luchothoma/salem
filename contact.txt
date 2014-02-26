@@ -1,11 +1,10 @@
-You can contact us at dingocode@gmail.com or visit
-our website http://www.dingoframework.com
+You can contact us at luchothoma@gmail.com or visit
+our website http://www.salemphp.com
 
-Documentation for the Dingo Framework can be found at
-http://www.dingoframework.com/docs
+ NOT YET
+Documentation for the Salem Framework can be found at
+ http://www.salemphp.com/docs
 
+ NOT YET
 You can report issues and make feature requests at
-http://code.google.com/p/dingoframework/issues/list
-
-Keep up with the latest news by following us on twitter
-http://twitter.com/dingocode
+ luchothoma@gmail.com
