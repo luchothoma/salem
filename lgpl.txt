@@ -1,6 +1,6 @@
-Dingo PHP Rapid Development Framework (http://www.dingoframework.com)
+Salem PHP Framework based at Dingo PHP Rapid Development Framework (http://www.dingoframework.com)
     Copyright (C) 2008 - 2010  Evan Byrne
-
+ Copyright (C) 2014  Luciano Thoma
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -17,12 +17,10 @@ Dingo PHP Rapid Development Framework (http://www.dingoframework.com)
     If you have questions regarding this license you may contact Evan Byrne
     via electronic or paper mail:
         
-        email: evantbyrne@gmail.com
+        email: luchothoma@gmail.com
         
-        paper: 1598 S. Force Rd.
-               Attica MI, 48412
-               USA
-    
+        paper: Uruguay 1642 casi Boulevard Artigas               Paysandu Paysandu, 60000
+               Uruguay    
 
                    GNU LESSER GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
