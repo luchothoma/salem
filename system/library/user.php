@@ -1,7 +1,7 @@
 <?php 
 namespace Salem;
 if(!defined('DINGO')){die('External Access to File Denied');}
-use Salem\db , Salem\session , Salem\config;
+use Salem\db , Salem\session;
 /**
  * User Authentication Library For Dingo Framework
  *
@@ -11,7 +11,7 @@ use Salem\db , Salem\session , Salem\config;
  * @docs            http://www.dingoframework.com/docs/user-library
  */
 
-class auth
+class user
 {
 	public static $table;
 	public static $types = array();
@@ -24,12 +24,7 @@ class auth
 	public static $_data;
 	
 	public static $_valid = FALSE;
-
-	// Create if not exist the table used
-	// ---------------------------------------------------------------------------	
-	public static function init(){
-		db::query('CREATE TABLE IF NOT EXISTS `'.self::$table.'` ( `name` varchar(25) NOT NULL, `cookie` varchar(25) NOT NULL, `value` text NOT NULL, `expire` int(11) NOT NULL )');
-	}
+	
 	
 	// Valid
 	// ---------------------------------------------------------------------------
