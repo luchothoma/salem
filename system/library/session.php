@@ -2,7 +2,7 @@
 if(!defined('DINGO')){die('External Access to File Denied');}
 use Salem\db, Salem\config;
 /**
- * Session Library For Dingo Framework
+ * Session Library For Salem Framework
  *
  * @author          Evan Byrne
  * @copyright       2008 - 2010
