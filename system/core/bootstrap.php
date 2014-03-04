@@ -64,15 +64,12 @@ class Bootstrap
 	// ---------------------------------------------------------------------------
 	public static function run()
 	{
-		define('SALEM_VERSION','0.8');
+		define('DINGO_VERSION','0.8');
 		
 		// Start buffer
 		ob_start();
 		
-		Config::set('system', SYSTEM);
-		Config::set('application', APPLICATION);
-		Config::set('config', CONFIG);
-
+		
 		// Load core files
 		require_once(SYSTEM.'/core/core.php');
 		require_once(SYSTEM.'/core/config.php');
@@ -84,9 +81,26 @@ class Bootstrap
 		require_once(SYSTEM.'/core/error.php');
 		require_once(APPLICATION.'/'.CONFIG.'/'.CONFIGURATION.'/config.php');
 		
+		
 		set_error_handler('Salem\dingo_error');
 		set_exception_handler('Salem\dingo_exception');
 		
+		
+		Config::set('system', SYSTEM);
+		Config::set('application', APPLICATION);
+		Config::set('config', CONFIG);
+		
+		//Load Libraries and Helpers
+		$libraries=Config::get('autoload_library');
+		foreach ($libraries as $lib) {
+			load::library($lib);
+		}
+		$helpers=Config::get('autoload_helper');
+		foreach ($helpers as $help) {
+			load::helper($help);
+		}
+
+
 		// Load route configuration
 		require_once(APPLICATION.'/'.CONFIG.'/route.php');
 		
@@ -98,23 +112,9 @@ class Bootstrap
 		// Set current page
 		define('CURRENT_PAGE', $request_url);
 		
-		//Load Libraries and Helpers
-		$libraries=Config::get('autoload_library');
-		$libraries[] = 'db';
-		$libraries[] = 'session';
-		//$libraries[] = 'auth';
-		foreach ($libraries as $lib) {
-			load::library($lib);
-		}
-		session::init();
-		auth::init();
-
-		$helpers=Config::get('autoload_helper');
-		foreach ($helpers as $help) {
-			load::helper($help);
-		}
-
+		
 		// Load Controller
+		//----------------------------------------------------------------------------------------------
 		
 		// If controller does not exist, give 404 error
 		if(!file_exists(APPLICATION.'/'.Config::get('folder_controllers')."/{$uri['controller']}.php"))
