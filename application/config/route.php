@@ -15,6 +15,7 @@ Route::add(array(
 	'alpha-numeric/:alpha-numeric'=>'main.bar',
 	'words/:words'=>'main.bar',
 	'any/:any'=>'main.bar',
-	'extension/:extension'=>'main.bar'
+	'extension/:extension'=>'main.bar',
+	'views' => 'main.index'
 	
 ));

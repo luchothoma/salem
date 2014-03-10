@@ -74,7 +74,9 @@ class View {
 	// New Section
 	// ---------------------------------------------------------------------------
 	public static function new_section($name, $default=false) {
-	
+		//default
+		//TRUE = overide the content
+		//FALSE = append new-content to content	
 		if(!$default) {
 		
 			echo self::$sections[$name];
