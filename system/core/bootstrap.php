@@ -1,5 +1,4 @@
 <?php
-
 namespace Salem;
 /**
  * Dingo Framework Bootstrap Class
@@ -64,7 +63,7 @@ class Bootstrap
 	// ---------------------------------------------------------------------------
 	public static function run()
 	{
-		define('DINGO_VERSION','0.8');
+		define('SALEM_VERSION','0.1');
 		
 		// Start buffer
 		ob_start();
@@ -90,17 +89,7 @@ class Bootstrap
 		Config::set('application', APPLICATION);
 		Config::set('config', CONFIG);
 		
-		//Load Libraries and Helpers
-		$libraries=Config::get('autoload_library');
-		foreach ($libraries as $lib) {
-			load::library($lib);
-		}
-		$helpers=Config::get('autoload_helper');
-		foreach ($helpers as $help) {
-			load::helper($help);
-		}
-
-
+		
 		// Load route configuration
 		require_once(APPLICATION.'/'.CONFIG.'/route.php');
 		
@@ -131,35 +120,6 @@ class Bootstrap
 		$controller = new $tmp();
 		
 		
-		// Check if using valid REST API
-		/*if(api::get())
-		{
-			if(!empty($controller->controller_api) and
-				is_array($controller->controller_api) and
-				!empty($controller->controller_api[$uri['function']]) and
-				is_array($controller->controller_api[$uri['function']]))
-			{
-				foreach($controller->controller_api[$uri['function']] as $e)
-				{
-					api::permit($e);
-				}
-				
-				if(!api::allowed(api::get()))
-				{
-					Load::error('404');
-				}
-			}
-			else
-			{
-				Load::error('404');
-			}
-		}*/
-		
-		
-		// Autoload Components
-		//self::autoload($controller);
-		
-		
 		// Check to see if function exists
 		if(!is_callable(array($controller, $uri['method']))) {
 		
@@ -167,6 +127,22 @@ class Bootstrap
 		
 		}
 		
+		//Load Libraries
+		$libraries=Config::get('autoload_library');
+		$libraries[]='db';
+		$libraries[]='session';
+		$libraries[]='auth';
+		foreach ($libraries as $lib) {
+			load::library($lib);
+		}
+		
+		//Load Helpers
+		$helpers=Config::get('autoload_helper');
+		foreach ($helpers as $help) {
+			load::helper($help);
+		}
+
+
 		// Run Function
 		call_user_func_array(array($controller, $uri['method']), $uri['args']);
 		

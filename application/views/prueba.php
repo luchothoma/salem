@@ -8,6 +8,7 @@
 				<?php 
 				session::init();
 				$db = db::db('casas'); 
+				print_r($db->select('*')->execute());
 				//print_r( $db->select('*')->execute() );?>
 	<?php //print_r( db::query('SELECT * FROM casas'));?>
 

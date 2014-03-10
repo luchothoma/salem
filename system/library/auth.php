@@ -1,7 +1,7 @@
 <?php 
-namespace Salem;
+//namespace Salem;
 if(!defined('DINGO')){die('External Access to File Denied');}
-use Salem\db , Salem\session;
+use Salem\db, Salem\load,  Salem\config;
 /**
  * User Authentication Library For Dingo Framework
  *
@@ -11,7 +11,7 @@ use Salem\db , Salem\session;
  * @docs            http://www.dingoframework.com/docs/user-library
  */
 
-class user
+class auth
 {
 	public static $table;
 	public static $types = array();
@@ -25,6 +25,11 @@ class user
 	
 	public static $_valid = FALSE;
 	
+	//Initialize Users Table
+	// ---------------------------------------------------------------------------
+	public static function init(){
+		db::query("CREATE TABLE IF NOT EXISTS `".config::get('user_table')."` ( `id` int(11) NOT NULL AUTO_INCREMENT, `email` varchar(125) NOT NULL, `username` varchar(25) NOT NULL, `password` varchar(125) NOT NULL, `type` varchar(25) NOT NULL, `data` text NOT NULL, PRIMARY KEY (`id`) )");
+	}
 	
 	// Valid
 	// ---------------------------------------------------------------------------
@@ -574,22 +579,25 @@ class user_update
 
 // Load config file
 load::config('user');
-user::$types = config::get('user_types');
+
+auth::init();
+
+auth::$types = config::get('user_types');
 
 // Set database table
-user::$table = db::db(config::get('user_table'),NULL,config::get('user_connection'));
+auth::$table = db::db(config::get('user_table'),NULL,config::get('user_connection'));
 
 // Get session data
-user::$_email = session::get('user_email');
-user::$_password = session::get('user_password');
+auth::$_email = session::get('user_email');
+auth::$_password = session::get('user_password');
 
 // Get information about current user
-if(user::$_email AND user::$_password)
+if(auth::$_email AND auth::$_password)
 {
-	$user = user::$table->select('*')
-						->where('email','=',user::$_email)
+	$user = auth::$table->select('*')
+						->where('email','=',auth::$_email)
 						->clause('AND')
-						->where('password','=',user::$_password)
+						->where('password','=',auth::$_password)
 						->limit(1)
 						->execute();
 	
@@ -597,17 +605,17 @@ if(user::$_email AND user::$_password)
 	if(!empty($user[0]))
 	{
 		$user = $user[0];
-		user::$_id = $user->id;
-		user::$_email = $user->email;
-		user::$_username = $user->username;
-		user::$_password = $user->password;
-		user::$_type = $user->type;
-		user::$_data = json_decode($user->data,true);
+		auth::$_id = $user->id;
+		auth::$_email = $user->email;
+		auth::$_username = $user->username;
+		auth::$_password = $user->password;
+		auth::$_type = $user->type;
+		auth::$_data = json_decode($user->data,true);
 		
 		// If not banned, mark as valid
-		if(user::$_type != 'banned')
+		if(auth::$_type != 'banned')
 		{
-			user::$_valid = TRUE;
+			auth::$_valid = TRUE;
 		}
 	}
 }

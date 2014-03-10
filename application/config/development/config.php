@@ -37,7 +37,7 @@ date_default_timezone_set('America/New_York');
 
 
 /* Auto Load Libraries */
-Config::set('autoload_library',array('db','url','session'));
+Config::set('autoload_library',array('url'));
 
 /* Auto Load Helpers */
 Config::set('autoload_helper',array());
@@ -55,10 +55,10 @@ Config::set('notes',array('path'=>'/','expire'=>'+5 minutes'));
 
 
 /* Application Folder Locations */
-Config::set('folder_views','view');             // Views
-Config::set('folder_controllers','controller'); // Controllers
-Config::set('folder_models','model');           // Models
-Config::set('folder_helpers','helper');         // Helpers
+Config::set('folder_views','views');             // Views
+Config::set('folder_controllers','controllers'); // Controllers
+Config::set('folder_models','models');           // Models
+Config::set('folder_helpers','helpers');         // Helpers
 Config::set('folder_languages','lang');     // Languages
-Config::set('folder_errors','error');           // Errors
+Config::set('folder_errors','errors');           // Errors
 Config::set('folder_orm','orm');                // ORM
