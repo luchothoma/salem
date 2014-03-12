@@ -3,11 +3,9 @@
 namespace Salem;
 
 Route::add(array(
-
-	//'/'=>'main.index',
+	
 	'/'=>'c/main.example',
 	'one/two'=>'main.foo',
-	
 	'int/:int'=>'main.bar',
 	'numeric/:numeric'=>'main.bar',
 	'alpha/:alpha'=>'main.bar',
