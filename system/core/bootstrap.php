@@ -116,7 +116,8 @@ class Bootstrap
 		require_once(APPLICATION.'/'.Config::get('folder_controllers')."/{$uri['controller']}.php");
 		
 		// Initialize controller
-		$tmp = '\\Controller\\'.ucfirst($uri['controller']);
+		//$tmp = '\\Controller\\'.ucfirst($uri['controller']);
+		$tmp = '\\Controller\\'.ucfirst(basename($uri['controller']));
 		$controller = new $tmp();
 		
 		
@@ -124,7 +125,7 @@ class Bootstrap
 		if(!is_callable(array($controller, $uri['method']))) {
 		
 			Load::error('404');
-		
+
 		}
 		
 		//Load Libraries
