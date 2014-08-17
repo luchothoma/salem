@@ -5,6 +5,6 @@ our website http://www.salemphp.com
 Documentation for the Salem Framework can be found at
  http://www.salemphp.com/docs
 
- NOT YET
+
 You can report issues and make feature requests at
  luchothoma@gmail.com

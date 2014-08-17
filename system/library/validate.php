@@ -1,5 +1,5 @@
-<?php if(!defined('DINGO')){die('External Access to File Denied');}
-
+<?php 
+//namespace Salem;
 /**
  * Dingo Framework Validation Helper
  *
@@ -11,6 +11,8 @@
 
 class valid
 {
+	private static $ok;
+
 	// Username
 	// ---------------------------------------------------------------------------
 	public static function username($username)
@@ -53,9 +55,9 @@ class valid
 	
 	// Length
 	// ---------------------------------------------------------------------------
-	public static function length($low,$high,$number)
+	public static function length($low,$high,$string)
 	{
-		return self::range($low,$high,strlen($number));
+		return self::range($low,$high,strlen($string));
 	}
 	
 	
@@ -99,4 +101,100 @@ class valid
 	{
 		return preg_match($exp, $val);
 	}	
+
+	// Exe
+	// ---------------------------------------------------------------------------
+	private static function exe($rule,$data){
+		$info = explode(':', $rule);
+		$devolver = '';
+		switch ($info[0]) {
+			case 'username':
+				if (! (self::username($data)) ) $devolver = 'Not a valid username';
+				break;
+			case 'name':
+				if (! (self::name($data)) ) $devolver = 'Not a valid name';
+				break;
+			case 'number':
+				if (! (self::number($data)) ) $devolver = 'Not a number';
+				break;
+			case 'int':
+				if (! (self::int($data)) ) $devolver = 'Not a integer';
+				break;
+			case 'range':
+				$val = explode ('to', $info[1]);
+				if (! (self::range( intval($val[0] ), intval($val[1]), $data)) ) $devolver = 'Value not in range'; 
+				break;
+			case 'length':
+				$val = explode ('to', $info[1]);
+				$low = '';
+				$high = '';
+				if (sizeOf($val)==1){
+					$low = '0';
+					$high = $val[0];		
+				}else{
+					$low = $val[0];
+					$high = $val[1];
+				}
+				if (! (self::length($low, $high, $data)) ) $devolver = 'Not valid length'; 
+				break;
+			case 'email':
+				if (! (self::email($data)) ) $devolver = 'Not an email';
+				break;
+			case 'phone':
+				if (! (self::phone($data)) ) $devolver = 'Not a phone number';
+				break;
+			case 'url':
+				if (! (self::url($data)) ) $devolver = 'Not a url';
+				break;
+			case 'required':
+				if (! (self::required($data)) ) $devolver = 'Not complete';
+				break;
+			case 'regex':
+				if (! (self::regex($data)) ) $devolver = 'Not verify the regex';
+				break;
+			default:
+				$devolver = 'Not defined rule';
+				break;
+		}
+		return $devolver;
+	}
+
+	// Test
+	// ---------------------------------------------------------------------------
+	public static function test($values,$rules){
+		$returnArr = array();
+		self::$ok = true;
+		foreach ($values as $key => $value) {
+			if(!isset($rules[$key])){
+				$returnArr[$key]='No rule for {$key}';
+			}else{
+				//analizar array de reglas a testear y aplicar
+				$returnArr[$key]= '';
+				for($x=0;$x<count($rules[$key]); $x++){
+					$result= self::exe( $rules[$key][$x], $values[$key]);
+					if ($result <> ''){
+						$returnArr[$key] = $result;
+						self::$ok = false;
+						break;
+					}
+				}
+			}
+		}
+		return $returnArr;
+	}
+
+	public static function success(){
+		return self::$ok;
+	}
+
+	/*
+	$values{
+		nombre: 'hola',
+		edad: '13'
+	}
+	$rules{
+		nombre:['required','length:14'],
+		edad:['required','int','range:0to110']
+	}
+	*/
 }

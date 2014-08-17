@@ -1,4 +1,4 @@
-<?php if(!defined('DINGO')){die('External Access to File Denied');}
+<?php
 
 /**
  * Email Library For Dingo Framework

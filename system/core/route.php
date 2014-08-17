@@ -1,7 +1,7 @@
 <?php
 
 namespace Salem;
-
+use Salem\View;
 /**
  * Dingo Framework Router Class
  *
@@ -91,9 +91,8 @@ class Route {
 			
 			// No default route
 			else {
-			
-				die('No default route  "\"  set.'); //TODO 404
-			
+					View::render('404');
+					die('');
 			}
 		
 		}
@@ -156,8 +155,8 @@ class Route {
 		
 		}
 		
-		die('No route found'); // TODO: change to 404
-		
+		View::render('404');
+		die('');
 	}
 	
 	

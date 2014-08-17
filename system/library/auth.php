@@ -3,7 +3,7 @@
 if(!defined('DINGO')){die('External Access to File Denied');}
 use Salem\db, Salem\load,  Salem\config;
 /**
- * User Authentication Library For Dingo Framework
+ * Authentication Library For Salem Framework
  *
  * @author          Evan Byrne
  * @copyright       2008 - 2010
@@ -18,6 +18,7 @@ class auth
 	
 	public static $_id;
 	public static $_email;
+	public static $_name;
 	public static $_username;
 	public static $_password;
 	public static $_type;
@@ -28,7 +29,7 @@ class auth
 	//Initialize Users Table
 	// ---------------------------------------------------------------------------
 	public static function init(){
-		db::query("CREATE TABLE IF NOT EXISTS `".config::get('user_table')."` ( `id` int(11) NOT NULL AUTO_INCREMENT, `email` varchar(125) NOT NULL, `username` varchar(25) NOT NULL, `password` varchar(125) NOT NULL, `type` varchar(25) NOT NULL, `data` text NOT NULL, PRIMARY KEY (`id`) )");
+		db::query("CREATE TABLE IF NOT EXISTS `".config::get('user_table')."` ( `id` int(11) NOT NULL AUTO_INCREMENT, `email` varchar(125) NOT NULL, `name` varchar(25) NOT NULL, `username` varchar(25) NOT NULL, `password` varchar(125) NOT NULL, `type` varchar(25) NOT NULL, `data` text NOT NULL, PRIMARY KEY (`id`) )");
 	}
 	
 	// Valid
@@ -218,6 +219,7 @@ class auth
 				$user = $user[0];
 				self::$_id = $user->id;
 				self::$_email = $user->email;
+				self::$_name = $user->name;
 				self::$_username = $user->username;
 				self::$_password = $user->password;
 				self::$_type = $user->type;
@@ -384,6 +386,14 @@ class auth
 	}
 	
 	
+	// Name
+	// ---------------------------------------------------------------------------
+	public static function name()
+	{
+		return self::$_name;
+	}
+
+
 	// Username
 	// ---------------------------------------------------------------------------
 	public static function username()
@@ -482,6 +492,7 @@ class user_update
 		{
 			$this->id = $user[0]->id;
 			$this->email = $user[0]->email;
+			$this->name = $user[0]->name;
 			$this->username = $user[0]->username;
 			$this->password = $user[0]->password;
 			$this->type = $user[0]->type;
@@ -512,6 +523,15 @@ class user_update
 	}
 	
 	
+	// Name
+	// ---------------------------------------------------------------------------
+	public function name($username)
+	{
+		$this->name = $name;
+		return $this;
+	}
+
+
 	// Username
 	// ---------------------------------------------------------------------------
 	public function username($username)
@@ -555,6 +575,7 @@ class user_update
 		$this->table->update(array(
 						'id'=>$this->id,
 						'email'=>$this->email,
+						'name'=>$this->name,
 						'username'=>$this->username,
 						'password'=>$this->password,
 						'type'=>$this->type,
@@ -607,6 +628,7 @@ if(auth::$_email AND auth::$_password)
 		$user = $user[0];
 		auth::$_id = $user->id;
 		auth::$_email = $user->email;
+		auth::$_name = $user->name;
 		auth::$_username = $user->username;
 		auth::$_password = $user->password;
 		auth::$_type = $user->type;

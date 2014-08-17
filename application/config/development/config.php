@@ -37,7 +37,7 @@ date_default_timezone_set('America/New_York');
 
 
 /* Auto Load Libraries */
-Config::set('autoload_library',array('url'));
+Config::set('autoload_library',array('url','validate'));
 
 /* Auto Load Helpers */
 Config::set('autoload_helper',array());

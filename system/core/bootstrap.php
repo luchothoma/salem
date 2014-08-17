@@ -108,7 +108,8 @@ class Bootstrap
 		// If controller does not exist, give 404 error
 		if(!file_exists(APPLICATION.'/'.Config::get('folder_controllers')."/{$uri['controller']}.php"))
 		{
-			Load::error('404');
+			Load::view('404');
+			die('');
 		}
 		
 		
@@ -124,7 +125,7 @@ class Bootstrap
 		// Check to see if function exists
 		if(!is_callable(array($controller, $uri['method']))) {
 		
-			Load::error('404');
+			Load::view('404');
 
 		}
 		
