@@ -1,6 +1,6 @@
 <?php 
 if(!defined('DINGO')){die('External Access to File Denied');}
-use Salem\db, Salem\config, Salem\input;
+use \DateTime, Salem\db, Salem\config, Salem\input, Salem\cookie;
 /**
  * Session Library For Dingo Framework
  *
@@ -26,10 +26,10 @@ class session
 	// ---------------------------------------------------------------------------
 	public static function cleanup()
 	{
-		$d = new DateTime();
-		
+		$d = new \DateTime();
+
 		$t = db::db(self::$config['table'],NULL,self::$config['connection']);
-		
+
 		$t->delete('expire','<=',$d->format('U'));
 	}
 	
@@ -55,9 +55,9 @@ class session
 						 ->where('cookie','=',input::cookie($session))
 						 ->execute();
 			
-			if(isset($res[0]->value))
+			if(isset($res[0]['value']))
 			{
-				return $res[0]->value;
+				return $res[0]['value'];
 			}
 			else
 			{
@@ -76,7 +76,7 @@ class session
 			$cookie = self::$config['cookie'];
 		}
 		
-		$d = new DateTime();
+		$d = new \DateTime();
 		$d->modify($cookie['expire']);
 		
 		$salt = self::salt();
@@ -147,7 +147,7 @@ class session
 		
 		$t = db::db(self::$config['table'],NULL,self::$config['connection']);
 		$t->delete('cookie','=',input::cookie($name));
-		
+
 		$cookie['name'] = $name;
 		cookie::delete($cookie);
 		
@@ -176,6 +176,6 @@ class session
 }
 
 session::$config = config::get('session');
-session::cleanup();
 //Initialize session
 session::init();
+session::cleanup();

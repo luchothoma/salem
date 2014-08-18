@@ -6,8 +6,7 @@
 			<p>Boring default content</p>
 			<img src="img/cosa.jpg"/>
 				<?php 
-
-				session::init();
+				/*
 				$db = db::db('casas'); 
 				print_r($db->select('*')->execute());
 
@@ -27,7 +26,17 @@
 					echo 'bien';
 				}else{
 					echo 'mal';
-				}
+				}*/
+				/*auth::create(array(
+	'username'=>'lthoma',
+	'name'=>'Luciano Thoma',
+	'email'=>'luchothoma@gmail.com',
+	'password'=>'test',
+	'type'=>'admin'
+));*/
+				//echo auth::check('luchothoma@gmail.com',auth::hash('test'));
+				//echo auth::login('luchothoma@gmail.com','test');
+				//auth::logout();
 
 
 				//print_r( $db->select('*')->execute() );?>

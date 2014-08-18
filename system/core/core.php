@@ -1,7 +1,7 @@
 <?php
 
 namespace Salem;
-
+use \DataTime;
 /**
  * Dingo Cookie Class
  *
@@ -24,12 +24,12 @@ class Cookie
 		if(!isset($settings['httponly'])){$settings['httponly']=FALSE;}
 		if(!isset($settings['expire']))
 		{
-			$ex = new DateTime();
+			$ex = new \DateTime();
 			$time = $ex->format('U');
 		}
 		else
 		{
-			$ex = new DateTime();
+			$ex = new \DateTime();
 			$ex->modify($settings['expire']);
 			$time = $ex->format('U');
 		}

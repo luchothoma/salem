@@ -112,7 +112,7 @@ class auth
 			if(!empty($user[0]))
 			{
 				// If not banned, mark as valid
-				if($user[0]->type != 'banned')
+				if($user[0]['type'] != 'banned')
 				{
 					$valid = TRUE;
 				}
@@ -217,13 +217,13 @@ class auth
 			if(!empty($user[0]))
 			{
 				$user = $user[0];
-				self::$_id = $user->id;
-				self::$_email = $user->email;
-				self::$_name = $user->name;
-				self::$_username = $user->username;
-				self::$_password = $user->password;
-				self::$_type = $user->type;
-				self::$_data = $user->data;
+				self::$_id = $user['id'];
+				self::$_email = $user['email'];
+				self::$_name = $user['name'];
+				self::$_username = $user['username'];
+				self::$_password = $user['password'];
+				self::$_type = $user['type'];
+				self::$_data = $user['data'];
 				
 				// If not banned, mark as valid
 				if(self::$_type != 'banned')
@@ -246,6 +246,14 @@ class auth
 		session::delete('user_email');
 		session::delete('user_password');
 		
+		self::$_id = '';
+		self::$_email = '';
+		self::$_name = '';
+		self::$_username = '';
+		self::$_password = '';
+		self::$_type = '';
+		self::$_data = '';
+
 		self::$_valid = FALSE;
 	}
 	
@@ -626,13 +634,13 @@ if(auth::$_email AND auth::$_password)
 	if(!empty($user[0]))
 	{
 		$user = $user[0];
-		auth::$_id = $user->id;
-		auth::$_email = $user->email;
-		auth::$_name = $user->name;
-		auth::$_username = $user->username;
-		auth::$_password = $user->password;
-		auth::$_type = $user->type;
-		auth::$_data = json_decode($user->data,true);
+		auth::$_id = $user['id'];
+		auth::$_email = $user['email'];
+		auth::$_name = $user['name'];
+		auth::$_username = $user['username'];
+		auth::$_password = $user['password'];
+		auth::$_type = $user['type'];
+		auth::$_data = json_decode($user['data'],true);
 		
 		// If not banned, mark as valid
 		if(auth::$_type != 'banned')

@@ -91,8 +91,7 @@ class Route {
 			
 			// No default route
 			else {
-					View::render('404');
-					die('');
+					load::error('general','No root route set','The root directorie "/" has not define a controller action.');
 			}
 		
 		}
@@ -155,8 +154,8 @@ class Route {
 		
 		}
 		
-		View::render('404');
-		die('');
+		// If it's here, route not found
+		load::error('404');
 	}
 	
 	
