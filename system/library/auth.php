@@ -42,7 +42,7 @@ class auth
 	
 	// Is Type
 	// ---------------------------------------------------------------------------
-	public static function is_type($t)
+	public static function isType($t)
 	{
 		if(self::$_valid OR $t == 'banned')
 		{
@@ -59,7 +59,7 @@ class auth
 	
 	// Banned
 	// ---------------------------------------------------------------------------
-	public static function banned()
+	public static function isBanned()
 	{
 		// Return TRUE is banned, FALSE otherwise
 		return(self::$types[self::$_type] === self::$types['banned']);
@@ -75,6 +75,8 @@ class auth
 		// Get information about current user
 		if($i AND $password)
 		{
+			//Hash the password
+			$password = self::hash( $password );
 			// Find by ID
 			if(preg_match('/^([0-9]+)$/',$i))
 			{
@@ -157,7 +159,7 @@ class auth
 		// If user is found
 		if(!empty($user[0]))
 		{
-			$user[0]->data = json_decode($user[0]->data,true);
+			$user[0]['data'] = json_decode($user[0]['data'],true);
 			return $user[0];
 		}
 		
@@ -178,6 +180,7 @@ class auth
 		// Try to log in
 		if($i AND $password)
 		{
+			//Hash the password
 			$password = self::hash($password);
 		
 			// Find by ID
@@ -223,7 +226,7 @@ class auth
 				self::$_username = $user['username'];
 				self::$_password = $user['password'];
 				self::$_type = $user['type'];
-				self::$_data = $user['data'];
+				self::$_data = json_decode($user['data'],true);
 				
 				// If not banned, mark as valid
 				if(self::$_type != 'banned')
@@ -343,38 +346,13 @@ class auth
 	}
 	
 	
-	// Unique
+	// Exist
 	// ---------------------------------------------------------------------------
-	public static function unique($i)
+	public static function exist($i)
 	{
-		// Find by ID
-		if(preg_match('/^([0-9]+)$/',$i))
-		{
-			$user = self::$table->select('*')
-			                    ->where('id','=',$i)
-			                    ->limit(1)
-			                    ->execute();
-		}
-		
-		// Find by Username
-		elseif(preg_match('/^([\-_ a-z0-9]+)$/i',$i))
-		{
-			$user = self::$table->select('*')
-			                    ->where('username','=',$i)
-			                    ->limit(1)
-			                    ->execute();
-		}
-		
-		// Find by E-mail
-		else
-		{
-			$user = self::$table->select('*')
-			                    ->where('email','=',$i)
-			                    ->limit(1)
-			                    ->execute();
-		}
-		
-		return (!isset($user[0]));
+		$user=self::get( $i );
+
+		return ( isset($user[0]) );
 	}
 	
 	
@@ -457,6 +435,7 @@ class user_update
 	
 	public $id;
 	public $email;
+	public $name;
 	public $username;
 	public $password;
 	public $type;
@@ -498,13 +477,13 @@ class user_update
 		
 		if(isset($user[0]))
 		{
-			$this->id = $user[0]->id;
-			$this->email = $user[0]->email;
-			$this->name = $user[0]->name;
-			$this->username = $user[0]->username;
-			$this->password = $user[0]->password;
-			$this->type = $user[0]->type;
-			$this->data = json_decode($user[0]->data,true);
+			$this->id = $user[0]['id'];
+			$this->email = $user[0]['email'];
+			$this->name = $user[0]['name'];
+			$this->username = $user[0]['username'];
+			$this->password = $user[0]['password'];
+			$this->type = $user[0]['type'];
+			$this->data = json_decode($user[0]['data'],true);
 		}
 		else
 		{
@@ -533,7 +512,7 @@ class user_update
 	
 	// Name
 	// ---------------------------------------------------------------------------
-	public function name($username)
+	public function name($name)
 	{
 		$this->name = $name;
 		return $this;

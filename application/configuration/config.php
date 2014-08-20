@@ -12,10 +12,9 @@ namespace Salem;
 
 
 // Application's Base URL
-define('BASE_URL','http://localhost/dingo/');
+define('BASE_URL','http://localhost/salem/');
 
 // Does Application Use Mod_Rewrite URLs?
-//define('MOD_REWRITE',FALSE);
 define('MOD_REWRITE',TRUE);
 
 // Turn Debugging On?
@@ -33,11 +32,11 @@ define('ERROR_LOG_FILE','log.txt');
  * Syntax for your local timezone can be found at
  * http://www.php.net/timezones
  */
-date_default_timezone_set('America/New_York');
+date_default_timezone_set('America/Montevideo');
 
 
 /* Auto Load Libraries */
-Config::set('autoload_library',array('url','validate'));
+Config::set('autoload_library',array('db','session','auth','url','validate'));
 
 /* Auto Load Helpers */
 Config::set('autoload_helper',array());

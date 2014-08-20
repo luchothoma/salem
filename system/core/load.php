@@ -119,7 +119,7 @@ class Load
 	// ---------------------------------------------------------------------------
 	public static function config($file)
 	{
-		return self::file(APPLICATION.'/'.CONFIG.'/'.CONFIGURATION,$file,'Configuration');
+		return self::file(APPLICATION.'/'.CONFIG,$file,'Configuration');
 	}
 	
 	

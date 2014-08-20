@@ -34,11 +34,38 @@
 	'password'=>'test',
 	'type'=>'admin'
 ));*/
-				//echo auth::check('luchothoma@gmail.com',auth::hash('test'));
-				//echo auth::login('luchothoma@gmail.com','test');
+				//echo auth::check('luchothoma@gmail.com','test');
+				//echo auth::login('lgtg@op.com','test');
 				//auth::logout();
-
-
+				/*
+				echo auth::id()."\r\n";
+				echo auth::email()."\r\n";
+				echo auth::name()."\r\n";
+				echo auth::username()."\r\n";
+				echo auth::type()."\r\n";
+				echo auth::password()."\r\n";
+				//echo auth::data()."\r\n";
+				echo auth::valid()."\r\n";
+				echo auth::isBanned()."b\r\n";
+				if (auth::exist("luchothoma@gmail.com")){
+					echo "existe";
+				}else{
+					echo "no existe";
+				}
+				print_r(auth::get('lthoma'));
+				*/
+				/*
+				auth::update('1')
+		           ->name('Lucho Gini')
+		           ->type('admin')
+		           ->password('test')
+		           ->data('fecha','12/9/2000')
+		           ->save();
+				*/
+		        //echo auth::name();
+		        //echo auth::data('fecha');
+		        //echo auth::data('altura');
+		        auth::delete('lthoma');
 				//print_r( $db->select('*')->execute() );?>
 	<?php //print_r( db::query('SELECT * FROM casas'));//anda esto?>
 

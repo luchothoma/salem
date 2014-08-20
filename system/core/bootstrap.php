@@ -78,7 +78,7 @@ class Bootstrap
 		require_once(SYSTEM.'/core/view.php');
 		require_once(SYSTEM.'/core/input.php');
 		require_once(SYSTEM.'/core/error.php');
-		require_once(APPLICATION.'/'.CONFIG.'/'.CONFIGURATION.'/config.php');
+		require_once(APPLICATION.'/'.CONFIG.'/config.php');
 		
 		
 		set_error_handler('Salem\dingo_error');
@@ -130,9 +130,9 @@ class Bootstrap
 		
 		//Load Libraries
 		$libraries=Config::get('autoload_library');
-		$libraries[]='db';
-		$libraries[]='session';
-		$libraries[]='auth';
+		//$libraries[]='db';
+		//$libraries[]='session';
+		//$libraries[]='auth';
 		foreach ($libraries as $lib) {
 			load::library($lib);
 		}
