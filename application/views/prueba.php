@@ -6,6 +6,32 @@
 			<p>Boring default content</p>
 			<img src="img/cosa.jpg"/>
 				<?php 
+				$table = db::db('casas','houses','other')->all();
+				foreach ($table as $field) {
+					echo $field->info();
+					echo '';
+				}
+				//db::truncate('casas');
+				//db::drop('casas');
+				/*
+				print_r( db::connection('other')->query('Select * From casas') );
+				print_r( db::db('casas',NULL,'other')->select('*')->execute() );
+				*/
+				/*$houses = load::model('uses');
+				print_r($houses->get('a'));*/
+				/*
+				$table = db::table('users');
+				$data = $table->select('username','id')
+              ->where('username','!=','loma')
+              ->clause('AND')
+              ->where('id','!=',0)
+              ->order_by('username','DESC')
+              ->execute();
+              foreach ($data as $value) {
+              	echo $value[0].' '.$value[1].'<br>';
+              }*/
+				/*load::helper('prueba');
+				doit();*/
 				/*
 				$db = db::db('casas'); 
 				print_r($db->select('*')->execute());
@@ -28,10 +54,10 @@
 					echo 'mal';
 				}*/
 				/*auth::create(array(
-	'username'=>'lthoma',
-	'name'=>'Luciano Thoma',
-	'email'=>'luchothoma@gmail.com',
-	'password'=>'test',
+	'username'=>'lthofffma',
+	'name'=>'Luciano Thfffoma',
+	'email'=>'luchothofffma@gmail.com',
+	'password'=>'teffst',
 	'type'=>'admin'
 ));*/
 				//echo auth::check('luchothoma@gmail.com','test');
@@ -65,9 +91,10 @@
 		        //echo auth::name();
 		        //echo auth::data('fecha');
 		        //echo auth::data('altura');
-		        auth::delete('lthoma');
+		        //auth::delete('lthoma');
+
 				//print_r( $db->select('*')->execute() );?>
-	<?php //print_r( db::query('SELECT * FROM casas'));//anda esto?>
+	<?php //print_r( db::query('Select * FROM casas'));//anda esto?>
 
 	<?php /*echo '<br><br><br><br>';$db = Dingo\datab('mytable'); print_r($db);print_r( $db->select('*')->execute() );*/?>
 	</body>

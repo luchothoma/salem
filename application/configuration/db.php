@@ -20,7 +20,13 @@ Config::set('db',array(
 		'username'=>'root',      // Username
 		'password'=>'',          // Password
 		'database'=>'mybase'       // Database
-	
+	),
+
+	'other'=>array(
+		'driver'=>'mysql',       // Driver
+		'host'=>'localhost',     // Host
+		'username'=>'root',      // Username
+		'password'=>'',          // Password
+		'database'=>'ejemplo'       // Database
 	)
-	
 ));

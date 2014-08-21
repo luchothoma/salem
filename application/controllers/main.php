@@ -24,7 +24,6 @@ class Main {
 	}
 
 	public function example() {
-	
 		View::render('prueba');
 	//Routing views to subFolders like "/views/v/prueba.php is like 'v/prueba'
 	}

@@ -136,7 +136,7 @@ class db
 	// ---------------------------------------------------------------------------
 	public static function truncate($table)
 	{
-		return self::$connections['default']->truncate($table);
+		return self::query("Delete FROM ".$table);
 	}
 	
 	
@@ -144,7 +144,7 @@ class db
 	// ---------------------------------------------------------------------------
 	public static function drop($table)
 	{
-		return self::$connections['default']->drop($table);
+		return self::query("Drop Table If Exists ".$table);
 	}
 }
 
@@ -569,6 +569,7 @@ class DingoQuery
 	// ---------------------------------------------------------------------------
 	public function where($col,$operator,$val)
 	{
+		$operator = strtoupper($operator);
 		if(
 			($operator != '=') AND
 			($operator != '!=') AND

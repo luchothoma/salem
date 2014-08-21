@@ -1,5 +1,5 @@
 <?php
-use Salem\DingoQuery , Salem\DingoSQL;
+use Salem\DingoQuery , Salem\DingoSQL, Salem\load;
 /**
  * DB PDO Driver For Dingo Framework DB Library
  *

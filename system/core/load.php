@@ -40,7 +40,7 @@ class Load
 	
 	// Parent Controller
 	// ---------------------------------------------------------------------------
-	public static function parent_controller($controller)
+	public static function parentController($controller)
 	{
 		return self::controller($controller);
 	}
@@ -78,7 +78,7 @@ class Load
 	
 	// Parent Model
 	// ---------------------------------------------------------------------------
-	public static function parent_model($model)
+	public static function parentModel($model)
 	{
 		// Model class
 		$model_class = explode('/',$model);
