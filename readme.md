@@ -14,6 +14,6 @@ Desarrollado por Luciano Thoma
 
 Social Networks // Redes Sociales
 
-Twitter @luchothoma
-Facebook /luchothoma
+Twitter (@luchothoma) [https://twitter.com/luchothoma]
+Facebook (luchothoma) [https://www.facebook.com/LuchoThoma]
 email: luchothoma@gmail.com
