@@ -47,7 +47,7 @@ class url
 	// ---------------------------------------------------------------------------
 	public static function redirect($url = '')
 	{
-		header('Location: '.url::base(TRUE).$url);
+		header('Location: '.$url);
 		exit;
 	}
 }

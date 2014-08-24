@@ -5,12 +5,33 @@
 				
 			<p>Boring default content</p>
 			<img src="img/cosa.jpg"/>
-				<?php 
+				<?php
+				echo $algo;
+				/*
+				$table = db::table('users');
+				$data = $table->select('*')
+              ->paginate(2,2,$pag)
+              ->execute();
+              echo sizeof($data);
+              print_r($pag);
+              */
+              /*
+              url::redirect(url::page('int/3'));
+              url::redirect('http://iglove.com.uy/');
+				// Select the table
+				/*$table = db::table('users');
+				echo $table->total();
+				// Query the database
+				$count = $table->count()
+               ->where('id','>','1')
+               ->execute(); 
+               echo $count;*/
+				/* //ORM Basic
 				$table = db::db('casas','houses','other')->all();
 				foreach ($table as $field) {
 					echo $field->info();
 					echo '';
-				}
+				}*/
 				//db::truncate('casas');
 				//db::drop('casas');
 				/*

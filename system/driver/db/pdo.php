@@ -331,7 +331,7 @@ class pdo_db_table
 		elseif($query->type == 'count')
 		{
 			$tmp = $this->db->query(DingoSQL::build_count($query,$this->db->driver));
-			$data = $tmp[0]->num;
+			$data = $tmp[0]['num'];
 			
 		}
 		// Updates

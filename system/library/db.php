@@ -690,11 +690,18 @@ class DingoQuery
 		$q->_join = $this->_join;
 		$count = $q->execute();
 		
-		// Paginate
+		if( $p ){
+		// With Paginate Library
 		load::library('pagination');
-		$p = new pagination($count,$page,$limit);
+		$p = new \pagination($count,$page,$limit);
 		$this->offset($p->min);
 		$this->limit($limit);
+
+		}else{
+		//Without.
+		$this->offset( ($page-1) * $limit );
+		$this->limit( $limit );
+		}
 		
 		return $this;
 	}

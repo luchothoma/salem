@@ -65,7 +65,7 @@ class valid
 	// ---------------------------------------------------------------------------
 	public static function email($email)
 	{
-		return preg_match('/^([_\.a-z0-9]{3,})@([\-_\.a-z0-9]{3,})\.([a-z]{2,})$/is',$email);
+		return filter_var( $url, FILTER_VALIDATE_EMAIL);
 	}
 	
 	
@@ -85,7 +85,7 @@ class valid
 	// ---------------------------------------------------------------------------
 	public static function url($url)
 	{
-		return preg_match('/(http:\/\/|https:\/\/|www.)([a-zA-Z0-9_\-.:/@]+)\.([a-z]{2,4})(\/[a-zA-Z0-9_\-]{0,}+)?\.?(htm|html|php)?(([\?\&][a-zA-Z0-9_\-]{0,}\=[a-zA-Z0-9_\-]{0,})+)?/gi',$url);
+		return filter_var( $url, FILTER_VALIDATE_URL);
 	}
 	
 	// Required

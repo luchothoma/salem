@@ -26,6 +26,14 @@ class pagination
 	// ---------------------------------------------------------------------------
 	public function __construct($resource,$page=1,$limit=10)
 	{
+		this->create($resource,$page,$limit);	
+	}
+	
+
+	// Construct
+	// ---------------------------------------------------------------------------
+	public function create($resource,$page=1,$limit=10)
+	{
 		$this->page = $page;
 		$this->limit = $limit;
 		$this->min = (($this->page*$this->limit)-$this->limit);
@@ -42,9 +50,9 @@ class pagination
 			$this->resource = array();
 			$this->count = $resource;
 			$this->calculate();
-		}
+		}	
 	}
-	
+
 	
 	// Calculate
 	// ---------------------------------------------------------------------------

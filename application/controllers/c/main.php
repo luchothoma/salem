@@ -25,7 +25,7 @@ class Main {
 
 	public function example() {
 	
-		View::render('prueba');
+		View::render('prueba',['algo'=>date('U')]);
 	//Routing views to subFolders like "/views/v/prueba.php is like 'v/prueba'
 	}
 }
