@@ -50,4 +50,29 @@ class url
 		header('Location: '.$url);
 		exit;
 	}
+
+
+	// Is Ajax Petition
+	// ---------------------------------------------------------------------------
+	public static function isAjax()
+	{
+		return (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') ? true : false;
+	}
+
+
+	// Is Post Petition
+	// ---------------------------------------------------------------------------
+	public static function isPost()
+	{
+		return ( $_SERVER['REQUEST_METHOD'] == 'POST' ) ;
+	}
+
+
+	// Is Get Petition
+	// ---------------------------------------------------------------------------
+	public static function isGet()
+	{
+		return ( $_SERVER['REQUEST_METHOD'] == 'GET' ) ;
+	}
+
 }

@@ -7,6 +7,8 @@
 			<img src="img/cosa.jpg"/>
 				<?php
 				echo $algo;
+				$e = ( \url::isAjax() ? 'si' : 'no');
+				echo $e;
 				/*
 				$table = db::table('users');
 				$data = $table->select('*')
