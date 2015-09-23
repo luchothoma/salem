@@ -1,4 +1,6 @@
-<?php if(!defined('DINGO')){die('External Access to File Denied');}
+<?php 
+namespace Salem;
+if(!defined('DINGO')){die('External Access to File Denied');}
 
 /**
  * Dingo Framework URL Library
@@ -75,4 +77,11 @@ class url
 		return ( $_SERVER['REQUEST_METHOD'] == 'GET' ) ;
 	}
 
+	// Return the actually request url
+	// ---------------------------------------------------------------------------
+	public static function actually()
+	{
+		//To see why I do this, check system/core/bootstrap.php
+		return constant('CURRENT_PAGE');
+	}
 }

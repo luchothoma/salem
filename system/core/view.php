@@ -40,8 +40,8 @@ class View {
 	
 	// Extend
 	// ---------------------------------------------------------------------------
-	public static function extend($view, $data=array()) {
-	
+	public static function extend($view, $data= array()) {
+
 		self::$extensions[] = array('view'=>$view, 'data'=>$data);
 	
 	}

@@ -178,4 +178,4 @@ class session
 session::$config = config::get('session');
 session::cleanup();
 //Initialize session
-session::init();
+//session::init();

@@ -99,12 +99,27 @@ class db
 		}
 	}
 	
+	// cleanQuery
+	// ---------------------------------------------------------------------------
+	public static function cleanQuery($arr)
+	{
+		$ret=array();
+		for($x=0;$x<sizeof($arr);$x++){
+			$elem=$arr[$x];
+			$e=$elem;
+			for($i=0; $i<=((sizeof($elem)/2)-1); $i++){
+				$e= array_diff_assoc($e,array($i=>$elem[$i]));
+			}
+			array_push($ret,$e);
+		}
+		return $ret;
+	}
 	
 	// Query
 	// ---------------------------------------------------------------------------
 	public static function query($sql)
 	{
-		return self::$connections['default']->query($sql);
+		return self::cleanQuery(self::$connections['default']->query($sql));
 	}
 	
 	
@@ -711,6 +726,6 @@ class DingoQuery
 	// ---------------------------------------------------------------------------
 	public function execute()
 	{
-		return $this->table->execute($this);
+		return db::cleanQuery($this->table->execute($this));
 	}
 }
