@@ -17,6 +17,11 @@ class email
 	private $subject;
 	private $attachments;
 	
+	//Verify if email is well writing
+	static function isValid($email)
+	{ 
+    	return filter_var($email, FILTER_VALIDATE_EMAIL);
+	}
 	
 	// Construct
 	// ---------------------------------------------------------------------------
