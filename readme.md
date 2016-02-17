@@ -12,6 +12,8 @@ Desarrollado por Luciano Thoma
 
 -------------------------
 
+[DOCUMENTATION](https://lgtg.nixiweb.com/salemwiki)
+
 Social Networks // Redes Sociales
 
 Twitter [@luchothoma](https://twitter.com/luchothoma)
