@@ -1,23 +1,12 @@
 <?php 
-//namespace Salem;
-/**
- * Dingo Framework Validation Helper
- *
- * @Author          Evan Byrne
- * @Copyright       2008 - 2010
- * @Project Page    http://www.dingoframework.com
- * @docs            http://www.dingoframework.com/docs/validation-helper
- */
-
-class valid
+class validate
 {
 	private static $ok;
-
 	// Username
 	// ---------------------------------------------------------------------------
 	public static function username($username)
 	{
-		return preg_match('/^([\-_ a-z0-9]+)$/is',$username);
+		return preg_match('/^([\-_ a-z0-9]+)$/is',$username)==1;
 	}
 	
 	
@@ -25,7 +14,7 @@ class valid
 	// ---------------------------------------------------------------------------
 	public static function name($name)
 	{
-		return preg_match('/^([ a-z]+)$/is',$name);
+		return preg_match('/^([ a-z]+)$/is',$name)==1;
 	}
 	
 	
@@ -33,7 +22,7 @@ class valid
 	// ---------------------------------------------------------------------------
 	public static function number($number)
 	{
-		return preg_match('/^([\.0-9]+)$/is',$number);
+		return preg_match('/^([\.0-9]+)$/is',$number)==1;
 	}
 	
 	
@@ -41,7 +30,7 @@ class valid
 	// ---------------------------------------------------------------------------
 	public static function int($int)
 	{
-		return preg_match('/^([0-9]+)$/is',$int);
+		return preg_match('/^([0-9]+)$/is',$int)==1;
 	}
 	
 	
@@ -65,7 +54,7 @@ class valid
 	// ---------------------------------------------------------------------------
 	public static function email($email)
 	{
-		return filter_var( $url, FILTER_VALIDATE_EMAIL);
+		return filter_var( $email, FILTER_VALIDATE_EMAIL) != false;
 	}
 	
 	
@@ -75,17 +64,16 @@ class valid
 	{
 		if(!$strict)
 		{
-			$phone = preg_replace('/([ \(\)\-]+)/','',$phone);
+			$phone = preg_replace('/([ \(\)\-\+]+)/','',$phone);
 		}
 		
-		return preg_match('/^([0-9]{10})$/',$phone);
+		return preg_match('/^([0-9]+)$/',$phone)==1;
 	}
-
 	// Url Address
 	// ---------------------------------------------------------------------------
 	public static function url($url)
 	{
-		return filter_var( $url, FILTER_VALIDATE_URL);
+		return filter_var( $url, FILTER_VALIDATE_URL) != false;
 	}
 	
 	// Required
@@ -94,18 +82,16 @@ class valid
 	{
 		return ($required != "");
 	}
-
 	// Regex
 	// ---------------------------------------------------------------------------
 	public static function regex($exp,$val)
 	{
 		return preg_match($exp, $val);
 	}	
-
 	// Exe
 	// ---------------------------------------------------------------------------
 	private static function exe($rule,$data){
-		$info = explode(':', $rule);
+		$info = explode(':', $rule,2);
 		$devolver = '';
 		switch ($info[0]) {
 			case 'username':
@@ -118,11 +104,11 @@ class valid
 				if (! (self::number($data)) ) $devolver = 'Not a number';
 				break;
 			case 'int':
-				if (! (self::int($data)) ) $devolver = 'Not a integer';
+				if (! (self::int($data)) ) $devolver = 'Not an integer';
 				break;
 			case 'range':
 				$val = explode ('to', $info[1]);
-				if (! (self::range( intval($val[0] ), intval($val[1]), $data)) ) $devolver = 'Value not in range'; 
+				if (! (self::range( intval($val[0] ), intval($val[1]), $data)) ) $devolver = 'Value not in range('.$val[0].'-'.$val[1].')'; 
 				break;
 			case 'length':
 				$val = explode ('to', $info[1]);
@@ -147,10 +133,10 @@ class valid
 				if (! (self::url($data)) ) $devolver = 'Not a url';
 				break;
 			case 'required':
-				if (! (self::required($data)) ) $devolver = 'Not complete';
+				if (! (self::required($data)) ) $devolver = 'Not completed';
 				break;
 			case 'regex':
-				if (! (self::regex($data)) ) $devolver = 'Not verify the regex';
+				if (! (self::regex($info[1],$data)) ) $devolver = 'Not verify the regex';
 				break;
 			default:
 				$devolver = 'Not defined rule';
@@ -158,7 +144,6 @@ class valid
 		}
 		return $devolver;
 	}
-
 	// Test
 	// ---------------------------------------------------------------------------
 	public static function test($values,$rules){
@@ -169,7 +154,7 @@ class valid
 				$returnArr[$key]='No rule for {$key}';
 			}else{
 				//analizar array de reglas a testear y aplicar
-				$returnArr[$key]= '';
+				//$returnArr[$key]= ''; se comenta para que no devuelva las reglas que psaron el test vacias y solo devuelva las que fallaron
 				for($x=0;$x<count($rules[$key]); $x++){
 					$result= self::exe( $rules[$key][$x], $values[$key]);
 					if ($result <> ''){
@@ -182,11 +167,9 @@ class valid
 		}
 		return $returnArr;
 	}
-
 	public static function success(){
 		return self::$ok;
 	}
-
 	/*
 	$values{
 		nombre: 'hola',
@@ -196,5 +179,15 @@ class valid
 		nombre:['required','length:14'],
 		edad:['required','int','range:0to110']
 	}
+	
+	$values=array(
+		'nombre'=> 'holer',
+		'edad'=> 'holanda9e'
+	);
+	$rules=array(
+		'nombre'=>array('required','length:3', 'int'),
+		'edad'=>array('required','regex:/^t.*9[a-z]*$/i')//'int','range:0to110')
+	);
 	*/
 }
+?>
