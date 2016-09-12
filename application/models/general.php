@@ -1,7 +1,7 @@
 <?php 
 use Salem\db;
 
-class general_model
+class general
 {
   public function makeQuery($table, $field, $operation, $value)
   {
