@@ -52,7 +52,7 @@ class Load
 	{
 		// Model class
 		$model_class = explode('/',$model);
-		$model_class = end($model_class).'_model';
+		$model_class = end($model_class);
 		
 		
 		if(!class_exists($model_class))
