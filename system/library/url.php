@@ -1,6 +1,6 @@
 <?php 
 namespace Salem;
-if(!defined('DINGO')){die('External Access to File Denied');}
+
 
 /**
  * Dingo Framework URL Library
