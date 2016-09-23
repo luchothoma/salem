@@ -70,9 +70,9 @@ class Bootstrap
 		
 		
 		// Load core files
-		require_once(SYSTEM.'/core/core.php');
+		require_once(SYSTEM.'/core/cookie.php');
 		require_once(SYSTEM.'/core/config.php');
-		require_once(SYSTEM.'/core/api.php');
+		//require_once(SYSTEM.'/core/api.php'); TODO
 		require_once(SYSTEM.'/core/route.php');
 		require_once(SYSTEM.'/core/load.php');
 		require_once(SYSTEM.'/core/view.php');

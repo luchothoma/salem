@@ -167,7 +167,7 @@ class Load
 	// ---------------------------------------------------------------------------
 	public static function driver($library,$driver)
 	{
-		return self::file(SYSTEM."/driver/$library",$driver,'drver');
+		return self::file(SYSTEM."/driver/$library",$driver,'driver');
 	}
 	
 	
