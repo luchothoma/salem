@@ -1,7 +1,7 @@
 <?php 
 use Salem\load;
 load::parentModel('general');
-class uses_model extends general_model
+class uses extends general
 {
   public function get($val)
   {

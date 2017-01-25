@@ -1,7 +1,7 @@
 <?php
 use Salem\db;
 
-class house_model
+class house
 {
   public function get($name)
   {

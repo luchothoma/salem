@@ -52,7 +52,7 @@ class Load
 	{
 		// Model class
 		$model_class = explode('/',$model);
-		$model_class = end($model_class).'_model';
+		$model_class = end($model_class);
 		
 		
 		if(!class_exists($model_class))
@@ -167,7 +167,7 @@ class Load
 	// ---------------------------------------------------------------------------
 	public static function driver($library,$driver)
 	{
-		return self::file(SYSTEM."/driver/$library",$driver,'drver');
+		return self::file(SYSTEM."/driver/$library",$driver,'driver');
 	}
 	
 	

@@ -21,7 +21,7 @@ class Route {
 		'alpha'=>'/^([a-zA-Z]+)$/',
 		'alpha-int'=>'/^([a-zA-Z0-9]+)$/',
 		'alpha-numeric'=>'/^([a-zA-Z0-9\.]+)$/',
-		'words'=>'/^([_a-zA-Z0-9\- ]+)$/',
+		'words'=>'/^([_a-zA-Z0-9\.\- ]+)$/',
 		'any'=>'/^(.*?)$/',
 		'extension'=>'/^([a-zA-Z]+)\.([a-zA-Z]+)$/'
 	);
