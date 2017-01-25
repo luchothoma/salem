@@ -136,7 +136,7 @@ class validate
 				if (! (self::required($data)) ) $devolver = 'Not completed';
 				break;
 			case 'regex':
-				if (! (self::regex($info[1],$data)) ) $devolver = 'Not verify the regex';
+				if (! (self::regex( $info[1], $data)) ) $devolver = 'Not verify the regex';
 				break;
 			default:
 				$devolver = 'Not defined rule';
