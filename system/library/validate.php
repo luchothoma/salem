@@ -100,25 +100,25 @@ class validate
 	}	
 	// Exe
 	// ---------------------------------------------------------------------------
-	private static function exe($rule,$data){
+	private static function exe($rule,$data, $msg){
 		$info = explode(':', $rule,2);
 		$devolver = '';
 		switch ($info[0]) {
 			case 'username':
-				if (! (self::username($data)) ) $devolver = 'Not a valid username';
+				if (! (self::username($data)) ) $devolver = ( !is_null($msg) && isset($msg[$info[0]]) )? $msg[$info[0]]:'Not a valid username';
 				break;
 			case 'name':
-				if (! (self::name($data)) ) $devolver = 'Not a valid name';
+				if (! (self::name($data)) ) $devolver = ( !is_null($msg) && isset($msg[$info[0]]) )? $msg[$info[0]]:'Not a valid name';
 				break;
 			case 'number':
-				if (! (self::number($data)) ) $devolver = 'Not a number';
+				if (! (self::number($data)) ) $devolver = ( !is_null($msg) && isset($msg[$info[0]]) )? $msg[$info[0]]:'Not a number';
 				break;
 			case 'int':
-				if (! (self::int($data)) ) $devolver = 'Not an integer';
+				if (! (self::int($data)) ) $devolver = ( !is_null($msg) && isset($msg[$info[0]]) )? $msg[$info[0]]:'Not an integer';
 				break;
 			case 'range':
 				$val = explode ('to', $info[1]);
-				if (! (self::range( intval($val[0] ), intval($val[1]), $data)) ) $devolver = 'Value not in range('.$val[0].'-'.$val[1].')';
+				if (! (self::range( intval($val[0] ), intval($val[1]), $data)) ) $devolver = ( !is_null($msg) && isset($msg[$info[0]]) )? $msg[$info[0]]:'Value not in range('.$val[0].'-'.$val[1].')';
 				break;
 			case 'length':
 				$val = explode ('to', $info[1]);
@@ -131,22 +131,22 @@ class validate
 					$low = $val[0];
 					$high = $val[1];
 				}
-				if (! (self::length($low, $high, $data)) ) $devolver = 'Not valid length'; 
+				if (! (self::length($low, $high, $data)) ) $devolver = ( !is_null($msg) && isset($msg[$info[0]]) )? $msg[$info[0]]:'Not valid length'; 
 				break;
 			case 'email':
-				if (! (self::email($data)) ) $devolver = 'Not an email';
+				if (! (self::email($data)) ) $devolver = ( !is_null($msg) && isset($msg[$info[0]]) )? $msg[$info[0]]:'Not an email';
 				break;
 			case 'phone':
-				if (! (self::phone($data)) ) $devolver = 'Not a phone number';
+				if (! (self::phone($data)) ) $devolver = ( !is_null($msg) && isset($msg[$info[0]]) )? $msg[$info[0]]:'Not a phone number';
 				break;
 			case 'url':
-				if (! (self::url($data)) ) $devolver = 'Not a url';
+				if (! (self::url($data)) ) $devolver = ( !is_null($msg) && isset($msg[$info[0]]) )? $msg[$info[0]]:'Not a url';
 				break;
 			case 'required':
-				if (! (self::required($data)) ) $devolver = 'Not completed';
+				if (! (self::required($data)) ) $devolver = ( !is_null($msg) && isset($msg[$info[0]]) )? $msg[$info[0]]:'Not completed';
 				break;
 			case 'regex':
-				if (! (self::regex( $info[1], $data)) ) $devolver = 'Not verify the regex';
+				if (! (self::regex( $info[1], $data)) ) $devolver = ( !is_null($msg) && isset($msg[$info[0]]) )? $msg[$info[0]]:'Not verify the regex';
 				break;
 			default:
 				$devolver = 'Not defined rule';
@@ -157,7 +157,7 @@ class validate
 
 	// Test
 	// ---------------------------------------------------------------------------
-	public static function test($values,$rules){
+	public static function test($values,$rules,$messages = null){
 		$returnArr = array();
 		self::$ok = true;
 		foreach ($values as $key => $value) {
@@ -167,7 +167,8 @@ class validate
 				//analizar array de reglas a testear y aplicar
 				//$returnArr[$key]= ''; se comenta para que no devuelva las reglas que psaron el test vacias y solo devuelva las que fallaron
 				for($x=0;$x<count($rules[$key]); $x++){
-					$result= self::exe( $rules[$key][$x], $values[$key]);
+					$msg = (is_array($messages) && isset($messages[$key]))? $messages[$key] : null ;
+					$result= self::exe( $rules[$key][$x], $values[$key] , $msg );
 					if ($result <> ''){
 						$returnArr[$key] = $result;
 						self::$ok = false;
@@ -185,12 +186,16 @@ class validate
 
 	/*
 	$values=array(
- -		'nombre'=> 'holer',
- -		'edad'=> 'holanda9e'
- -	);
- -	$rules=array(
- -		'nombre'=>array('required','length:3', 'int'),
- -		'edad'=>array('required','regex:/^t.*9[a-z]*$/i')//'int','range:0to110')
- -	);
+ 		'nombre'=> 'holer',
+ 		'edad'=> 'holanda9e'
+ 	);
+ 	$rules=array(
+ 		'nombre'=>array('required','length:3'),
+ 		'edad'=>array('required','regex:/^t.*9[a-z]*$/i')//'int','range:0to110')
+ 	);
+ 	$messages=array(
+ 		'nombre'=>array('required'=> 'No completo el nombre','length'=> 'Largo mayor al permitido'),
+ 		'edad'=>array('required'=> 'No completo la edad','regex'=>'Solo use caracteres permitidos')//'int','range:0to110')
+ 	);
 	*/
 }
