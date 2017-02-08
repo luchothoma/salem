@@ -1,6 +1,5 @@
 <?php 
-if(!defined('DINGO')){die('External Access to File Denied');}
-use \DateTime, Salem\db, Salem\config, Salem\input, Salem\cookie;
+use Salem\db, Salem\config, Salem\input, Salem\cookie;
 /**
  * Session Library For Dingo Framework
  *

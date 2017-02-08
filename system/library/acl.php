@@ -1,5 +1,4 @@
-<?php if(!defined('DINGO')){die('External Access to File Denied');}
-
+<?php 
 /**
  * Access Control List Library Main Class For Dingo Framework
  *

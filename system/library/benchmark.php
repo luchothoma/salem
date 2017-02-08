@@ -1,5 +1,4 @@
-<?php if(!defined('DINGO')){die('External Access to File Denied');}
-
+<?php
 /**
  * Benchmark Library For Dingo Framework
  *

@@ -1,6 +1,5 @@
 <?php 
 namespace Salem;
-if(!defined('DINGO')){die('External Access to File Denied');}
 use Salem\db, Salem\load,  Salem\config;
 /**
  * Authentication Library For Salem Framework
@@ -583,11 +582,10 @@ class user_update
 	}
 }
 
-
-
 // Load config file
 load::config('user');
 
+//Initialize auth
 //auth::init();
 
 auth::$types = config::get('user_types');

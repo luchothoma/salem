@@ -1,5 +1,4 @@
-<?php if(!defined('DINGO')){die('External Access to File Denied');}
-
+<?php
 /**
  * Dingo Framework XSS Cleaning Library
  * - Requires the XML Library to be loaded in order to work!
